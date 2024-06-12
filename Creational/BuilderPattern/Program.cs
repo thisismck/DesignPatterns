@@ -13,8 +13,22 @@ Console.WriteLine("Hello, World!");
  * */
 
 
-var reportBuilder = new ReportBuilder();
-var reportDirector = new ReportDirector(reportBuilder);
-reportDirector.Run();
+var reportBuilder = new WeeklySalesReportBuilder();
+reportBuilder.SetTitle();
+reportBuilder.SetData();
+reportBuilder.SetGraph();
 var report = reportBuilder.GetReport();
-Console.WriteLine(report.Title);
+Console.WriteLine(report.Title );
+Console.WriteLine(report.Data);
+Console.WriteLine(report.Graph);
+
+
+var director = new ReportDirector(new WeeklySalesReportBuilder());
+
+Console.WriteLine(director.BuildReportAndReturn().Title);
+
+var standartReportBuilder = new ReportDirector(new StandartReportBuilder());
+
+Console.WriteLine(standartReportBuilder.BuildReportAndReturn());
+
+

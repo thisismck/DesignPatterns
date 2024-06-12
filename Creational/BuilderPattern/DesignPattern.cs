@@ -33,7 +33,33 @@ namespace BuilderPattern
 
     // 3. Builder class
 
-    public class ReportBuilder : IReportBuilder
+    public class WeeklySalesReportBuilder : IReportBuilder
+    {
+        private Report _report = new Report();
+
+        public Report GetReport()
+        {
+            return _report;
+        }
+
+        public void SetData()
+        {
+            _report.Data = "Weekly Sales Data";
+        }
+
+        public void SetGraph()
+        {
+            _report.Graph = "Weekly Sales Graph";
+        }
+
+        public void SetTitle()
+        {
+            _report.Title = "Weekly Sales Report";
+        }
+
+    }
+
+    public class StandartReportBuilder : IReportBuilder
     {
         private Report _report = new Report();
 
@@ -69,31 +95,14 @@ namespace BuilderPattern
             _reportBuilder = reportBuilder;
         }
 
-        public void BuildReport()
+        public Report BuildReportAndReturn()
         {
             _reportBuilder.SetTitle();
             _reportBuilder.SetData();
             _reportBuilder.SetGraph();
+            return _reportBuilder.GetReport();
         }
     }
 
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            IReportBuilder reportBuilder = new ReportBuilder();
-            ReportDirector reportDirector = new ReportDirector(reportBuilder);
-
-            reportDirector.BuildReport();
-
-            Report report = reportBuilder.GetReport();
-
-            Console.WriteLine(report.Title);
-            Console.WriteLine(report.Data);
-            Console.WriteLine(report.Graph);
-
-            Console.ReadLine();
-        }
-    }
 
 }
