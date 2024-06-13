@@ -64,5 +64,18 @@ namespace Decorator
         }
     }
 
+    public class MailWithEncrypted : MailDecorator
+    {
+        public MailWithEncrypted(IMail mail) : base(mail)
+        {
+        }
+
+        public override void Send()
+        {
+            Console.WriteLine("Encrypted.");
+            base.Send();
+        }
+    }
+
    
 }
